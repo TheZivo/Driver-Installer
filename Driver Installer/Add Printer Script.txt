@@ -1,0 +1,23 @@
+$portExists = get-printerport -name $portname -ErrorAction SilentlyContinue
+if($ProcessError){
+Write-Warning "Driver not installed please run application as administrator"
+}
+
+if(-not $portExists){
+	Add-PrinterPort -name $portname -PrinterHostAddress "$IPADDY$"
+}
+
+$printDriverName = "KX Driver"
+$printDriverExists = Get-PrinterDriver -name $printDriverName -ErrorAction SilentlyContinue
+
+%driverPath ="./inffileboi"
+if (-not $printDriverExists){
+	Add-PrinterDriver -name $printDriverName(placeholder can't use wildcard here) -InfPath "./inf" -ErrorAction SilentlyContinue -ErrorVariable ProcessError 	
+}
+else: 
+	Add-Printer -Name $printerModelName -DriverName $printDriverName -PortName $portName -ConnectionName $... -RenderMode SSR
+
+Set-PrinterConfiguration -PrinterName $printerModelName -Color false -DuplexingMode OneSided -PaperSize Letter
+
+
+
