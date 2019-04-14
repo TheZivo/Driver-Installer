@@ -14,6 +14,7 @@ namespace Driver_Installer
         [STAThread]
         static void Main()
         {
+            //Application.requestedExecutionLevel level = "requireAdministrator" uiAccess = "false" 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new StartForm());
