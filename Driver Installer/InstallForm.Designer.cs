@@ -33,12 +33,13 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
-            this.maskedTextBox2 = new System.Windows.Forms.MaskedTextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.checkBox6 = new System.Windows.Forms.CheckBox();
+            this.duplexDef = new System.Windows.Forms.CheckBox();
+            this.bwDef = new System.Windows.Forms.CheckBox();
+            this.startInstall = new System.Windows.Forms.Button();
+            this.printerIP = new System.Windows.Forms.MaskedTextBox();
+            this.printerModel = new System.Windows.Forms.ComboBox();
+            this.printerName = new System.Windows.Forms.MaskedTextBox();
+            this.testPage = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -93,83 +94,98 @@
             this.label5.TabIndex = 4;
             this.label5.Text = "Default Settings : ";
             // 
-            // maskedTextBox1
+            // duplexDef
             // 
-            this.maskedTextBox1.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold);
-            this.maskedTextBox1.Location = new System.Drawing.Point(252, 150);
-            this.maskedTextBox1.Name = "maskedTextBox1";
-            this.maskedTextBox1.Size = new System.Drawing.Size(162, 31);
-            this.maskedTextBox1.TabIndex = 5;
-            this.maskedTextBox1.Text = "Enter IP";
-            this.maskedTextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.duplexDef.AutoSize = true;
+            this.duplexDef.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold);
+            this.duplexDef.Location = new System.Drawing.Point(282, 327);
+            this.duplexDef.Name = "duplexDef";
+            this.duplexDef.Size = new System.Drawing.Size(148, 23);
+            this.duplexDef.TabIndex = 8;
+            this.duplexDef.Text = "Default to Duplex";
+            this.duplexDef.UseVisualStyleBackColor = true;
+            this.duplexDef.CheckedChanged += new System.EventHandler(this.duplexDef_CheckedChanged);
             // 
-            // maskedTextBox2
+            // bwDef
             // 
-            this.maskedTextBox2.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold);
-            this.maskedTextBox2.Location = new System.Drawing.Point(252, 244);
-            this.maskedTextBox2.Name = "maskedTextBox2";
-            this.maskedTextBox2.Size = new System.Drawing.Size(162, 31);
-            this.maskedTextBox2.TabIndex = 6;
-            this.maskedTextBox2.Text = "Enter IP";
-            this.maskedTextBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.maskedTextBox2.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.maskedTextBox2_MaskInputRejected);
+            this.bwDef.AutoSize = true;
+            this.bwDef.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bwDef.Location = new System.Drawing.Point(282, 292);
+            this.bwDef.Name = "bwDef";
+            this.bwDef.Size = new System.Drawing.Size(132, 23);
+            this.bwDef.TabIndex = 11;
+            this.bwDef.Text = "Default to B/W";
+            this.bwDef.UseVisualStyleBackColor = true;
+            this.bwDef.CheckedChanged += new System.EventHandler(this.bwDef_CheckedChanged);
             // 
-            // comboBox1
+            // startInstall
             // 
-            this.comboBox1.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(253, 197);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(162, 31);
-            this.comboBox1.TabIndex = 7;
-            this.comboBox1.Text = "    Machine Model";
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.startInstall.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold);
+            this.startInstall.Location = new System.Drawing.Point(535, 286);
+            this.startInstall.Name = "startInstall";
+            this.startInstall.Size = new System.Drawing.Size(155, 64);
+            this.startInstall.TabIndex = 14;
+            this.startInstall.Text = "Start";
+            this.startInstall.UseVisualStyleBackColor = true;
+            this.startInstall.Click += new System.EventHandler(this.startInstall_Click);
             // 
-            // checkBox1
+            // printerIP
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold);
-            this.checkBox1.Location = new System.Drawing.Point(282, 327);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(148, 23);
-            this.checkBox1.TabIndex = 8;
-            this.checkBox1.Text = "Default to Duplex";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.printerIP.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold);
+            this.printerIP.Location = new System.Drawing.Point(252, 150);
+            this.printerIP.Name = "printerIP";
+            this.printerIP.Size = new System.Drawing.Size(162, 31);
+            this.printerIP.TabIndex = 15;
+            this.printerIP.Text = "Enter IP";
+            this.printerIP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.printerIP.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.printerIP_MaskInputRejected);
             // 
-            // checkBox4
+            // printerModel
             // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox4.Location = new System.Drawing.Point(282, 292);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(132, 23);
-            this.checkBox4.TabIndex = 11;
-            this.checkBox4.Text = "Default to B/W";
-            this.checkBox4.UseVisualStyleBackColor = true;
+            this.printerModel.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.printerModel.FormattingEnabled = true;
+            this.printerModel.Location = new System.Drawing.Point(252, 197);
+            this.printerModel.Name = "printerModel";
+            this.printerModel.Size = new System.Drawing.Size(162, 31);
+            this.printerModel.TabIndex = 16;
+            this.printerModel.Text = "    Machine Model";
+            this.printerModel.SelectedIndexChanged += new System.EventHandler(this.printerModel_SelectedIndexChanged);
             // 
-            // checkBox6
+            // printerName
             // 
-            this.checkBox6.AutoSize = true;
-            this.checkBox6.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold);
-            this.checkBox6.Location = new System.Drawing.Point(282, 359);
-            this.checkBox6.Name = "checkBox6";
-            this.checkBox6.Size = new System.Drawing.Size(142, 23);
-            this.checkBox6.TabIndex = 13;
-            this.checkBox6.Text = "Print a Test Page";
-            this.checkBox6.UseVisualStyleBackColor = true;
-            this.checkBox6.CheckedChanged += new System.EventHandler(this.checkBox6_CheckedChanged);
+            this.printerName.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold);
+            this.printerName.Location = new System.Drawing.Point(252, 244);
+            this.printerName.Name = "printerName";
+            this.printerName.Size = new System.Drawing.Size(162, 31);
+            this.printerName.TabIndex = 17;
+            this.printerName.Text = "Printer Name";
+            this.printerName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.printerName.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.printerName_MaskInputRejected);
+            // 
+            // testPage
+            // 
+            this.testPage.AutoSize = true;
+            this.testPage.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold);
+            this.testPage.Location = new System.Drawing.Point(282, 365);
+            this.testPage.Name = "testPage";
+            this.testPage.Size = new System.Drawing.Size(142, 23);
+            this.testPage.TabIndex = 18;
+            this.testPage.Text = "Print a Test Page";
+            this.testPage.UseVisualStyleBackColor = true;
+            this.testPage.CheckedChanged += new System.EventHandler(this.testPage_CheckedChanged);
             // 
             // InstallForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.checkBox6);
-            this.Controls.Add(this.checkBox4);
-            this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.maskedTextBox2);
-            this.Controls.Add(this.maskedTextBox1);
+            this.Controls.Add(this.testPage);
+            this.Controls.Add(this.printerName);
+            this.Controls.Add(this.printerModel);
+            this.Controls.Add(this.printerIP);
+            this.Controls.Add(this.startInstall);
+            this.Controls.Add(this.bwDef);
+            this.Controls.Add(this.duplexDef);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -190,11 +206,12 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.MaskedTextBox maskedTextBox1;
-        private System.Windows.Forms.MaskedTextBox maskedTextBox2;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox checkBox4;
-        private System.Windows.Forms.CheckBox checkBox6;
+        private System.Windows.Forms.CheckBox duplexDef;
+        private System.Windows.Forms.CheckBox bwDef;
+        private System.Windows.Forms.Button startInstall;
+        private System.Windows.Forms.MaskedTextBox printerIP;
+        private System.Windows.Forms.ComboBox printerModel;
+        private System.Windows.Forms.MaskedTextBox printerName;
+        private System.Windows.Forms.CheckBox testPage;
     }
 }
