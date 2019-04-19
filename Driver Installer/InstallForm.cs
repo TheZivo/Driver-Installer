@@ -11,11 +11,14 @@ using System.Management;
 using System.Diagnostics;
 using System.Net;
 using System.Net.NetworkInformation;
+using System.Runtime.InteropServices;
 
 namespace Driver_Installer
 {
     public partial class InstallForm : Form
     {
+        ResultForm insProg = new ResultForm();
+
         public InstallForm()
         {
             InitializeComponent();
@@ -31,7 +34,7 @@ namespace Driver_Installer
         private void duplexDef_CheckedChanged(object sender, EventArgs e) { }
         private void testPage_CheckedChanged(object sender, EventArgs e) { }
 
-
+        public string nl = "\r\n";
         public void cmdLine(string command, string mod)
         {
                 
@@ -47,7 +50,7 @@ namespace Driver_Installer
         public bool driverExists()
         {
             System.Management.SelectQuery query = new System.Management.SelectQuery("Win32_SystemDriver");
-            query.Condition = "Name = 'SomeDriverName'";
+            query.Condition = "Name = 'KMUC74FP.DLL'";
 
             System.Management.ManagementObjectSearcher searcher = new System.Management.ManagementObjectSearcher(query);
             var drivers = searcher.Get();
@@ -70,27 +73,54 @@ namespace Driver_Installer
             cmdLine("ping", inputIP.ToString());
         }
 
-        private void addDriver()
-        {
+        
+        [DllImport("Setupapi.dll", EntryPoint = "InstallHinfSection", CallingConvention = CallingConvention.StdCall)]
 
+        public static extern void InstallHinfSection(
+            [In] IntPtr hwnd,
+            [In] IntPtr ModuleHandle,
+            [In, MarshalAs(UnmanagedType.LPWStr)] string CmdLineBuffer,
+            int nCmdShow);
+
+        public void addDriver()
+        {
+            string path = " ";
+            if (System.Environment.Is64BitOperatingSystem)
+            {
+                path = ".\\64bit\\OEMSETUP.INF";
+            }
+            else
+            {
+                path = ".\\32bit\\OEMSETUP.INF";
+            }
+            InstallHinfSection(IntPtr.Zero, IntPtr.Zero, path, 0);
         }
 
-
-        public void startInstall_Click(object sender, EventArgs e)
+        public void addPrinter()
         {
-            ResultForm insProg = new ResultForm();
+            
+        }
+
+    public void startInstall_Click(object sender, EventArgs e)
+        {
+            
             insProg.Show();
-            insProg.resbox.Text = "Checking if Driver is installed.";
+            insProg.resbox.Text = "Checking if Driver is installed..." + nl;
             if (driverExists())
             {
-                insProg.resbox.AppendText("Driver Found Attempting Communications with Printer");
+                insProg.resbox.AppendText("Driver Found" + nl);
 
             }
             else
             {
-                insProg.resbox.AppendText("Driver Not Found Installing...");
+                insProg.resbox.AppendText("Driver Not Found Installing..." + nl);
+                addDriver();
+                insProg.resbox.AppendText("Driver Has Been Installed" + nl);
             }
-            
+            insProg.resbox.AppendText("Attempting Communications with printer at provided IP");
+            pingPrinter();
+            insProg.resbox.AppendText("Adding Printer...");
+            addPrinter();
 
         }
 

@@ -19,6 +19,7 @@ namespace Driver_Installer
 {
     public partial class TechToolsForm : Form
     {
+        public string nl = "\r\n";
         //declare thread for scanner and context for mainthread
         public Thread scanTh;
         public SynchronizationContext MainThread;
@@ -88,17 +89,17 @@ namespace Driver_Installer
             ResultForm pingsweep = new ResultForm();
             pingsweep.Show();
 
-            pingsweep.resbox.Text = "Found the following hosts:" + Environment.NewLine + Environment.NewLine;
+            pingsweep.resbox.Text = "Found the following hosts:" + nl + nl;
             foreach (var iterHost in found.OrderBy(x => x.Key).Select(x => x.Value))
             {
-                pingsweep.resbox.AppendText(iterHost + Environment.NewLine);
+                pingsweep.resbox.AppendText(iterHost + nl);
             }
 
             pingsweep.resbox.AppendText
-                (Environment.NewLine + "Found the following Occupied IP's:" + Environment.NewLine + Environment.NewLine);
+                (Environment.NewLine + "Found the following Occupied IP's:" + nl + nl);
             foreach (var takenIP in occupied.OrderBy(x => x))
             {
-                pingsweep.resbox.AppendText(takenIP + Environment.NewLine); 
+                pingsweep.resbox.AppendText(takenIP + nl); 
             };
 
             found = new ConcurrentDictionary<string, string>();
